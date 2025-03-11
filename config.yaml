@@ -1,10 +1,10 @@
 provide_settings:
   llm:
-    provider: "OpenAI"
-    config:
-      model: "o1-mini"
-#      api_key: "sk-xxxx"  # Uncomment to override the `OPENAI_API_KEY` set in the environment variable
-#      base_url: ""
+#    provider: "OpenAI"
+#    config:
+#      model: "o1-mini"
+##      api_key: "sk-xxxx"  # Uncomment to override the `OPENAI_API_KEY` set in the environment variable
+##      base_url: ""
 
 #    provider: "DeepSeek"
 #    config:
@@ -12,11 +12,11 @@ provide_settings:
 ##      api_key: "sk-xxxx"  # Uncomment to override the `DEEPSEEK_API_KEY` set in the environment variable
 ##      base_url: ""
 
-#    provider: "SiliconFlow"
-#    config:
-#      model: "deepseek-ai/DeepSeek-R1"
-##      api_key: "xxxx"  # Uncomment to override the `SILICONFLOW_API_KEY` set in the environment variable
-##      base_url: ""
+    provider: "SiliconFlow"
+    config:
+      model: "deepseek-ai/DeepSeek-R1"
+      api_key: "sk-garsngbuepoqgzeyjkeulltjrwpnoznfaixuxyjgzsssiumw"  # Uncomment to override the `SILICONFLOW_API_KEY` set in the environment variable
+      base_url: "https://api.siliconflow.cn/v1"
 
 #    provider: "PPIO"
 #    config:
@@ -42,12 +42,12 @@ provide_settings:
 ##      base_url: ""
 
   embedding:
-    provider: "OpenAIEmbedding"
-    config:
-      model: "text-embedding-ada-002"
-#      api_key: ""  # Uncomment to override the `OPENAI_API_KEY` set in the environment variable
-#      base_url: "" # Uncomment to override the `OPENAI_BASE_URL` set in the environment variable
-#      dimension: 1536 # Uncomment to customize the embedding dimension 
+#    provider: "OpenAIEmbedding"
+#    config:
+#      model: "text-embedding-ada-002"
+##      api_key: ""  # Uncomment to override the `OPENAI_API_KEY` set in the environment variable
+##      base_url: "" # Uncomment to override the `OPENAI_BASE_URL` set in the environment variable
+##      dimension: 1536 # Uncomment to customize the embedding dimension 
 
 
 #    provider: "MilvusEmbedding"
@@ -65,10 +65,10 @@ provide_settings:
 ##      aws_access_key_id: ""  # Uncomment to override the `AWS_ACCESS_KEY_ID` set in the environment variable
 ##      aws_secret_access_key: ""  # Uncomment to override the `AWS_SECRET_ACCESS_KEY` set in the environment variable
     
-#    provider: "SiliconflowEmbedding"
-#    config:
-#      model: "BAAI/bge-m3"
-# .    api_key: ""   # Uncomment to override the `SILICONFLOW_API_KEY` set in the environment variable   
+    provider: "SiliconflowEmbedding"
+    config:
+      model: "BAAI/bge-m3"
+      api_key: "garsngbuepoqgzeyjkeulltjrwpnoznfaixuxyjgzsssiumw"   # Uncomment to override the `SILICONFLOW_API_KEY` set in the environment variable   
 
   file_loader:
     provider: "PDFLoader"
@@ -85,18 +85,16 @@ provide_settings:
 #    config: {}
 
   web_crawler:
-    provider: "FireCrawlCrawler"
-    config: {}
-
-    # provider: "Crawl4AICrawler"
-    # config: # Uncomment to custom browser configuration for Crawl4AI
-    #   browser_config:
-    #     headless: false
-    #     proxy: "http://127.0.0.1:7890"
-    #     chrome_channel: "chrome"
-    #     verbose: true
-    #     viewport_width: 800
-    #     viewport_height: 600
+    # provider: "FireCrawlCrawler"
+    # config: {   provider:Crawl4AICrawler"
+    config: #ncomment to custom browser configuration for Crawl4AI
+      browseronfig:
+        headls: false
+        # proxy"http://127.0.0.1:7890"
+        chromchannel: "chrome"
+        verbo: true
+        viewport_width: 800
+        viewport_height: 600
     
 #    provider: "JinaCrawler"
 #    config: {}
@@ -105,7 +103,7 @@ provide_settings:
     provider: "Milvus"
     config:
       default_collection: "deepsearcher"
-      uri: "./milvus.db"
+      uri: "http://192.168.29.234:19530"
       token: "root:Milvus"
       db: "default"
 
