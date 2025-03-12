@@ -15,7 +15,7 @@ provide_settings:
     provider: "SiliconFlow"
     config:
       model: "deepseek-ai/DeepSeek-R1"
-      api_key: ""  # Uncomment to override the `SILICONFLOW_API_KEY` set in the environment variable
+#      api_key: ""  # Uncomment to override the `SILICONFLOW_API_KEY` set in the environment variable
       base_url: "https://api.siliconflow.cn/v1"
 
 #    provider: "PPIO"
@@ -68,7 +68,7 @@ provide_settings:
     provider: "SiliconflowEmbedding"
     config:
       model: "BAAI/bge-m3"
-      api_key: ""   # Uncomment to override the `SILICONFLOW_API_KEY` set in the environment variable   
+#      api_key: ""   # Uncomment to override the `SILICONFLOW_API_KEY` set in the environment variable   
 
   file_loader:
     provider: "PDFLoader"

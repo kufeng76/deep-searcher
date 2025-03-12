@@ -1,14 +1,20 @@
 import argparse
 from typing import Dict, List, Union
+import os
+from dotenv import load_dotenv
+
+# 加载.env文件中的环境变量
+load_dotenv()
 
 import uvicorn
 from fastapi import Body, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from deepsearcher.configuration import Configuration, init_config
 from deepsearcher.offline_loading import load_from_local_files, load_from_website
-from deepsearcher.online_query import query
+from deepsearcher.online_query import query, query_stream
 
 app = FastAPI()
 
@@ -124,6 +130,29 @@ def perform_query(
     try:
         result_text, _, consume_token = query(original_query, max_iter)
         return {"result": result_text, "consume_token": consume_token}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/query-stream/")
+def perform_query_stream(
+    original_query: str = Query(
+        ...,
+        description="Your question here.",
+        examples=["Write a report about Milvus."],
+    ),
+    max_iter: int = Query(
+        3,
+        description="The maximum number of iterations for reflection.",
+        ge=1,
+        examples=[3],
+    ),
+):
+    try:
+        return StreamingResponse(
+            query_stream(original_query, max_iter),
+            media_type="text/event-stream"
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
