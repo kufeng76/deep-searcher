@@ -5,6 +5,10 @@ from deepsearcher.offline_loading import load_from_local_files
 from deepsearcher.online_query import query
 from deepsearcher.configuration import Configuration, init_config
 
+from dotenv import load_dotenv
+# 加载.env文件中的环境变量
+load_dotenv()
+
 httpx_logger = logging.getLogger("httpx")  # disable openai's logger output
 httpx_logger.setLevel(logging.WARNING)
 

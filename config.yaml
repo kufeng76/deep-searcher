@@ -14,7 +14,7 @@ provide_settings:
 
     provider: "SiliconFlow"
     config:
-      model: "deepseek-ai/DeepSeek-R1"
+      model: "deepseek-ai/DeepSeek-V3"
 #      api_key: ""  # Uncomment to override the `SILICONFLOW_API_KEY` set in the environment variable
       base_url: "https://api.siliconflow.cn/v1"
 
