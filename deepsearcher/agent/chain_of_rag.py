@@ -114,7 +114,9 @@ class ChainOfRAG(RAGAgent):
         self.max_iter = max_iter
         self.early_stopping = early_stopping
         self.route_collection = route_collection
-        self.collection_router = CollectionRouter(llm=self.llm, vector_db=self.vector_db)
+        self.collection_router = CollectionRouter(
+            llm=self.llm, vector_db=self.vector_db, dim=embedding_model.dimension
+        )
         self.text_window_splitter = text_window_splitter
 
     def _reflect_get_subquery(self, query: str, intermediate_context: List[str]) -> Tuple[str, int]:
@@ -134,7 +136,9 @@ class ChainOfRAG(RAGAgent):
     def _retrieve_and_answer(self, query: str) -> Tuple[str, List[RetrievalResult], int]:
         consume_tokens = 0
         if self.route_collection:
-            selected_collections, n_token_route = self.collection_router.invoke(query=query)
+            selected_collections, n_token_route = self.collection_router.invoke(
+                query=query, dim=self.embedding_model.dimension
+            )
         else:
             selected_collections = self.collection_router.all_collections
             n_token_route = 0
@@ -261,7 +265,7 @@ class ChainOfRAG(RAGAgent):
                     log.color_print(
                         f"<think> Early stopping after iteration {iter + 1}: Have enough information to answer the main query. </think>\n"
                     )
-                break
+                    break
 
         all_retrieved_results = deduplicate_results(all_retrieved_results)
         additional_info = {"intermediate_context": intermediate_contexts}
